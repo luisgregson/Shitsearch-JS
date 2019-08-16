@@ -14,46 +14,31 @@ export class RestaurantView extends React.Component {
     restaurants: []
   };
 
-  checkRestaurantId = restaurantFilter => {
-    if (restaurantFilter.id === undefined) {
-      return;
-    }
-    const filteredRestaurants = this.state.restaurants.filter(data => {
-      if (data.id === restaurantFilter.id) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-    if (filteredRestaurants.length === 1) {
+  filterRestaurantById = id => {
+    const matchingRestaurant = this.state.restaurants.find(
+      restaurant => restaurant.id === id
+    );
+    if (matchingRestaurant) {
       this.setState({
-        restaurants: [...filteredRestaurants]
+        restaurants: [matchingRestaurant]
       });
     }
   };
 
   searchBox = e => {
     const id = parseInt(e.target.value, 10);
-    this.checkRestaurantId({ id });
+    this.filterRestaurantById({ id });
   };
 
-  fetchRestaurants = async () => {
-    const response = await getRestaurants();
-    return response;
-  };
-
-  refresh = async () => {
-    const originalData = await this.fetchRestaurants();
+  resetRestaurantState = async () => {
+    const restaurants = await getRestaurants();
     this.setState({
-      restaurants: originalData
+      restaurants
     });
   };
 
   async componentDidMount() {
-    const data = await this.fetchRestaurants();
-    this.setState({
-      restaurants: data
-    });
+    await this.resetRestaurantState();
   }
 
   render() {
@@ -65,15 +50,15 @@ export class RestaurantView extends React.Component {
         </label>
         <button onClick={this.refresh}>Clear</button>
         <Container>
-          {this.state.restaurants.map(row => (
-            <li key={row.id}>
-              <h2>{row.name}</h2>
-              {row.rating}{" "}
+          {this.state.restaurants.map(restaurant => (
+            <li key={restaurant.id}>
+              <h2>{restaurant.name}</h2>
+              {restaurant.rating}{" "}
               <span role="img" aria-label="star">
                 ⭐️
               </span>
               <br />
-              {row.dogFriendly && (
+              {restaurant.dogFriendly && (
                 <>
                   <span role="img" aria-label="dog">
                     🐶
