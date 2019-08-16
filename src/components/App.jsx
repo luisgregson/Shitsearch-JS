@@ -1,24 +1,24 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { RestaurantView } from "./RestaurantView";
+import RestaurantView from './RestaurantView';
 
 export const App = () => (
   <div className="App">
     <h1>Welcome to Javascript shitsearch</h1>
     <p>
-      The idea is see if you can improve the readability{" "}
+      The idea is see if you can improve the readability{' '}
       <span role="img" aria-label="book">
         📖
-      </span>{" "}
-      and maintainability{" "}
+      </span>{' '}
+      and maintainability{' '}
       <span role="img" aria-label="tools">
         🛠
-      </span>{" "}
+      </span>{' '}
       of the code.
     </p>
     <p>
-      Currently the code works fine, but there are some improvements that we can
-      make.
+      Currently the code works fine, but there are some improvements
+      that we can make.
     </p>
     <p>Fork this sandbox and make it better!</p>
     <RestaurantView />
