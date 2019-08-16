@@ -4,7 +4,7 @@ import { RestaurantView } from "./RestaurantView";
 
 export const App = () => (
   <div className="App">
-    <h1>Welcome to Typescript shitsearch</h1>
+    <h1>Welcome to Javascript shitsearch</h1>
     <p>
       The idea is see if you can improve the readability and maintainability of
       the code.
